@@ -14,13 +14,6 @@ services:
     volumes:
       - ./sample/:/app/src
 
-  consumer:
-    build: .
-    command: yarn start
-    tty: true
-    volumes:
-      - ./consumer/:/app/src
-
   mongodb:
     image: mongo:3.4.0
     command: mongod --nojournal --replSet "rs" --smallfiles --oplogSize 128
