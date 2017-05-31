@@ -1,8 +1,12 @@
 const kafkaProducer = require('./kafka-producer');
 
-const oplogHandlers = {
-  onData: (data) => {
-    const topic = "kittens";
+const shouldStream = (data) => {
+  return data.ns !== '';
+};
+
+const onData = (data) => {
+  if (shouldStream(data)) {
+    const topic = 'kittens';
 
     kafkaProducer.send({
       topic: topic,
@@ -11,9 +15,13 @@ const oplogHandlers = {
         value: data
       }
     }).then(() => {
-      console.log('Sent to kafka');
+      console.log('Sent to kafka', data);
     });
-  },
+  }
+};
+
+const oplogHandlers = {
+  onData: onData,
   onErro: (error) => {
     console.log('Oplog error: ', error);
   },
