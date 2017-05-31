@@ -1,6 +1,6 @@
 const kafkaProducer = require('./kafka-producer');
-const kafkaHandlers = require('./kafka-handlers');
+const kafkaProducerHandlers = require('./kafka-producer-handlers');
 
 kafkaProducer.init().then(
-  kafkaHandlers.onInit
+  kafkaProducerHandlers.onInit
 );
