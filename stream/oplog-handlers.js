@@ -15,7 +15,7 @@ const onData = (data) => {
         value: JSON.stringify(data)
       }
     }).then(() => {
-      console.log('Sent to kafka', data);
+      console.log('Sent to kafka', data.o._id);
     });
   }
 };
