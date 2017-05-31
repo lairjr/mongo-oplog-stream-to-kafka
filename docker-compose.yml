@@ -16,9 +16,6 @@ services:
 
   mongodb:
     image: mongo:3.4.0
-    ports:
-      - 27017:27017
-      - 28017:28017
     command: mongod --nojournal --replSet "rs" --smallfiles --oplogSize 128
 
   dbConfig:
@@ -28,3 +25,22 @@ services:
     command: bash -c "sleep 10 && chmod +x /scripts/mongodb_config.sh && ./scripts/mongodb_config.sh"
     depends_on:
       - mongodb
+
+  topic:
+    image: ches/kafka
+    command: "kafka-topics.sh --create --topic kittens --replication-factor 1 --partitions 1 --zookeeper zookeeper:2181"
+    depends_on:
+      - zookeeper
+      - kafka
+
+  zookeeper:
+    image: zookeeper:3.4
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: ches/kafka
+    ports:
+      - "9092:9092"
+    environment:
+      ZOOKEEPER_IP: zookeeper
