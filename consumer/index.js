@@ -7,7 +7,8 @@ const consumer = new Kafka.GroupConsumer({
 
 const dataHandler = function (messageSet, topic, partition) {
   return Promise.all(messageSet.map((m) => {
-    console.log('Receive', topic, partition, m.offset, JSON.stringify(m.message.value.toString('utf8')));
+    const doc = JSON.parse(m.message.value.toString('utf8'));
+    console.log('Receive', topic, partition, m.offset, doc);
     // commit offset
     return consumer.commitOffset({topic: topic, partition: partition, offset: m.offset, metadata: 'optional'});
   }));

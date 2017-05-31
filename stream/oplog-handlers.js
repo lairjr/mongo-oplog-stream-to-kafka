@@ -12,7 +12,7 @@ const onData = (data) => {
       topic: topic,
       partition: 0,
       message: {
-        value: data
+        value: JSON.stringify(data)
       }
     }).then(() => {
       console.log('Sent to kafka', data);
