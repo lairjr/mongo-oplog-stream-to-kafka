@@ -2,17 +2,24 @@ version: '3'
 services:
   stream:
     build: .
-    command: yarn stream
+    command: yarn start
     tty: true
     volumes:
       - ./stream/:/app/src
 
   sample:
     build: .
-    command: yarn sample
+    command: yarn start
     tty: true
     volumes:
-      - ./sample/:/app/src/
+      - ./sample/:/app/src
+
+  consumer:
+    build: .
+    command: yarn start
+    tty: true
+    volumes:
+      - ./consumer/:/app/src
 
   mongodb:
     image: mongo:3.4.0

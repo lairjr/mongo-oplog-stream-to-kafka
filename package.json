@@ -4,8 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "sample": "node src/index.js",
-    "stream": "node src/index.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "mongoose": "^4.10.4",
