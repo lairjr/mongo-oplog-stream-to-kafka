@@ -5,14 +5,14 @@ services:
     command: yarn stream
     tty: true
     volumes:
-      - ./stream.js:/app/index.js
+      - ./stream/:/app/src
 
   sample:
     build: .
     command: yarn sample
     tty: true
     volumes:
-      - ./sample.js:/app/index.js
+      - ./sample/:/app/src/
 
   mongodb:
     image: mongo:3.4.0
