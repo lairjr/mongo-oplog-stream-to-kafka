@@ -19,7 +19,7 @@ const mongoHandlers = {
     tailOplog();
   },
   onConnectionError: (error) => {
-    console.log('connection error', error);
+    console.log('Mongo connection error', error);
   }
 }
 

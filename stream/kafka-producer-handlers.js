@@ -11,8 +11,8 @@ const kafkaProducerHandlers = {
     }).then(mongoHandlers.onConnect)
       .catch(mongoHandlers.onConnectionError);
   },
-  onInitError: () => {
-
+  onInitError: (error) => {
+    console.log('Kafka producer init error.', error);
   }
 }
 
