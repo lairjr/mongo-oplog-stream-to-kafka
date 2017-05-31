@@ -1,13 +1,18 @@
 version: '3'
 services:
-  app:
+  stream:
     build: .
-    command: yarn start
+    command: yarn stream
     tty: true
-    depends_on:
-      - mongodb
     volumes:
-      - ./index.js:/app/index.js
+      - ./stream.js:/app/index.js
+
+  sample:
+    build: .
+    command: yarn sample
+    tty: true
+    volumes:
+      - ./sample.js:/app/index.js
 
   mongodb:
     image: mongo:3.4.0
@@ -15,3 +20,11 @@ services:
       - 27017:27017
       - 28017:28017
     command: mongod --nojournal --replSet "rs" --smallfiles --oplogSize 128
+
+  dbConfig:
+    image: mongo:3.4.0
+    volumes:
+      - ./scripts/:/scripts
+    command: bash -c "sleep 10 && chmod +x /scripts/mongodb_config.sh && ./scripts/mongodb_config.sh"
+    depends_on:
+      - mongodb
